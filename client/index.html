@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+ <script src="/../socket.io/socket.io.js"></script>
+  <script>
+   var socket = io();
+</script>
+<script src="indexController.js"></script>
+Chat welcome
+
+Log in2<br>
+<input id="username" type="text"><br>
+<input id="password" type="password"><br>
+<button onclick="login()">Log in</button>
+<br><br>
+
+Register<br>
+<input id="firstName" type="text"><br>
+<input id="lastName" type="text"><br>
+<input id="email" type="text"><br>
+<input id="usernameReg" type="text"><br>
+<input id="passwordReg" type="text"><br>
+<input id="passwordRegRepeat" type="text"><br>
+<button onclick="register()">Register</button>
+</body>
+
+</html>
