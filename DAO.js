@@ -1,6 +1,6 @@
 module.exports.DAO = function() {
 
-    var users = ["asd"];
+    var users = [""];
 
     return {
             insertUser : function (user, callback) {
