@@ -31,8 +31,6 @@ app.post('/login',function(req, res){
 
 app.post('/register',function(req, res){
 
-	
-	
 	var user = req.body;
 	DAO.insertUser(user,function(err){
 		if(err){
@@ -53,6 +51,10 @@ app.post('/register',function(req, res){
 
 		
 	});
+});
+
+app.post("/user",function(){
+	req.session.username
 });
 
 app.get('/chatrooms',function(req, res){

@@ -7,10 +7,23 @@
  <script src="/../socket.io/socket.io.js"></script>
   <script>
    var socket = io();
+
+   function sendMessage(){
+    socket.emit('chat message',$("#messageBox").val());
+   }
+
+
+   socket.on('chat message', function(msg){
+    $('#messages').append($('<li>').text(msg));
+   });
+
 </script>
 <script src="homeController.js"></script>
 Chat welcome
+<div id="messages"></div>
 
+<input id="messageBox" type="text" />
+<button id="sendButton" onclick="sendMessage()">Send</button>
 </body>
 
 </html>
