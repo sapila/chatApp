@@ -21,16 +21,20 @@ reguser.passwordRegRepeat = $("#passwordRegRepeat").val();
         data: JSON.stringify(reguser),
         contentType: "application/json; charset=utf-8",
         dataType   : "json",
-        success    : function(data){
-        	alert(JSON.stringify(data));
-            console.log("Pure jQuery Pure JS object");
+        success    : function(response){
+            alert(JSON.stringify(response))
+            if(response.status != 200){
+                alert(response.message);
+            }else{
+                window.location = "http://localhost:3000/chatrooms";
+            }
+            
         }
     });
 
 }
 
 function login(){
-alert("log")
 var loguser = {};
 
 loguser.username = $("#username").val();
@@ -42,9 +46,12 @@ loguser.password = $("#password").val();
         data: JSON.stringify(loguser),
         contentType: "application/json; charset=utf-8",
         dataType   : "json",
-        success    : function(data){
-        	alert(JSON.stringify(data));
-            console.log("Pure jQuery Pure JS object");
+        success    : function(response){
+        	if(response.status != 200){
+                alert(response.message);
+            }else{
+                 window.location = "http://localhost:3000/chatrooms";
+            }
         }
     });
 }
