@@ -1,4 +1,24 @@
 <!doctype html>
+<head>
+<style type="text/css">
+#messages{
+	width:90%;
+	margin:0 auto;
+
+}
+.bubble{
+		margin:5px;
+		padding-left:20px;
+		padding-right:20px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		word-wrap: break-word;
+		border:1px solid blue;
+		border-radius:10px;
+	}
+	</style>
+	
+</head>
 <html>
 
 
@@ -14,7 +34,14 @@
 
 
    socket.on('chat message', function(msg){
-    $('#messages').append($('<li>').text(msg));
+    $('#messages').append($('<div class="bubble">').text(msg));
+   });
+   socket.on('onlineUsers', function(msg){
+   	$('#whoIsOnline').text("");
+   	for(var i=0;i<msg.length;i++){
+   		$('#whoIsOnline').append($('<div>').text(msg[i]));
+   	}
+    
    });
 
 </script>
@@ -24,6 +51,9 @@ Chat welcome
 
 <input id="messageBox" type="text" />
 <button id="sendButton" onclick="sendMessage()">Send</button>
+<h4>Online Now</h4>
+<div id="whoIsOnline">
+</div>
 </body>
 
 </html>

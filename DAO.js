@@ -1,6 +1,6 @@
 module.exports.DAO = function() {
 
-    var users = [""];
+    var users = [];
 
     return {
             insertUser : function (user, callback) {
@@ -10,7 +10,7 @@ module.exports.DAO = function() {
                 callback(null);
              },
 
-            getUser : function (user, callback) {
+            logUser : function (user, callback) {
                var found = false;
                     for(var i=0;i<users.length;i++){
                         if(user.username === users[i].usernameReg && user.password === users[i].passwordReg){
@@ -24,6 +24,10 @@ module.exports.DAO = function() {
                         var error = new Error("User not found");
                         callback(error, null);
                     }
+     
+            },
+            getUsers : function (callback) {
+               callback(null,users);
      
             }
     }

@@ -13,7 +13,7 @@ app.get('/', function(req, res) {
 
 app.post('/login',function(req, res){
 	var user = req.body;
-	DAO.getUser(user,function(err,foundUser){
+	DAO.logUser(user,function(err,foundUser){
 		if(err){
 			var response = {};
 			response.message = "Wrong Credentials";
@@ -53,9 +53,31 @@ app.post('/register',function(req, res){
 	});
 });
 
-app.post("/user",function(){
-	req.session.username
+
+app.get('/users', function (req, res) {
+  DAO.getUsers(function (err,users){
+
+  	if(err){
+
+  	}else{
+
+  		var usersResult = [];
+  		for(var i=0;i<users.length;i++){
+  			console.log(users[i]);
+  			var user = {};
+  			user.username = users[i].usernameReg;
+  			user.email = users[i].email;
+  			user.firstName = users[i].firstName;
+  			user.lastName = users[i].lastName;
+  			usersResult.push(user);
+  		}
+
+  		res.send(usersResult);
+  	}
+  });
+  res.end();
 });
+
 
 app.get('/chatrooms',function(req, res){
 	if(req.session.username)
