@@ -27,9 +27,13 @@
  <script src="/../socket.io/socket.io.js"></script>
   <script>
    var socket = io();
+   var chatroom = "General";
+
+  // Storing the data:
+  localStorage.setItem("privateChatUser","");
 
    function sendMessage(){
-    socket.emit('chat message',$("#messageBox").val());
+    socket.emit('chat message',{message:$("#messageBox").val()});
    }
 
 
@@ -39,10 +43,22 @@
    socket.on('onlineUsers', function(msg){
    	$('#whoIsOnline').text("");
    	for(var i=0;i<msg.length;i++){
-   		$('#whoIsOnline').append($('<div>').text(msg[i]));
+   		$('#whoIsOnline').append('<div class="frientButton">'+msg[i]+'</div>');
    	}
-    
+
    });
+
+    socket.on('availableChatrooms',function(msg){
+        $('#availableChatrooms').text("");
+        for(var i=0;i<msg.length;i++){
+          $('#availableChatrooms').append('<div onclick="changeChatroom(\''+msg[i]+'\')" class="frientButton">'+msg[i]+'</div>');
+        }
+    });
+
+   function changeChatroom(roomname){
+      socket.emit('changeChatroom',roomname);
+      $('#messages').empty() ;
+   }
 
 </script>
 <script src="homeController.js"></script>
@@ -54,6 +70,11 @@ Chat welcome
 <h4>Online Now</h4>
 <div id="whoIsOnline">
 </div>
+
+<h4>Chatrooms</h4>
+<div id="availableChatrooms">
+</div>
+
 </body>
 
 </html>

@@ -86,4 +86,11 @@ app.get('/chatrooms',function(req, res){
 		res.send("No auth")
 });
 
+app.get('/private',function(req, res){
+	if(req.session.username)
+		res.sendFile(__dirname + '/client/chatrooms/private.html');
+	else
+		res.send("No auth")
+});
+
 }
