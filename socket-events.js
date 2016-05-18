@@ -18,34 +18,33 @@ io.on('connection', function(socket){
   socket.join('general');
 
 
-  
-  socket.on('disconnect', function(){
-    console.log('user disconnected' + JSON.stringify(chatrooms));
+//user disconnect  
+      socket.on('disconnect', function(){
+        console.log('user disconnected' + JSON.stringify(chatrooms));
 
-    //remove user from online users list
-    var index = onlineUsers.indexOf(socket.handshake.session.username);
-  	if (index > -1) {
-    	onlineUsers.splice(index, 1);
-	   }
-	  socket.leave(socket.room);
-    io.emit('onlineUsers',onlineUsers);
-  });
+        //remove user from online users list
+        var index = onlineUsers.indexOf(socket.handshake.session.username);
+      	if (index > -1) {
+        	onlineUsers.splice(index, 1);
+    	   }
+    	  socket.leave(socket.room);
+        io.emit('onlineUsers',onlineUsers);
+      });
+//user message
+      socket.on('chat message', function(packet){
+            io.sockets.in(socket.room).emit('chat message', socket.handshake.session.username+" : "+packet.message);
+        }
+      );
+//change chat room 
+      socket.on('changeChatroom', function(newroom){
+        // leave the current room (stored in session)
+        socket.leave(socket.room);
+        // join new room, received as function parameter
+        socket.join(newroom);
+        // update socket session room title
+        socket.room = newroom;
 
-  socket.on('chat message', function(packet){
-
-        io.sockets.in(socket.room).emit('chat message', socket.handshake.session.username+" : "+packet.message);
-    }
-  );
-
-  socket.on('changeChatroom', function(newroom){
-    // leave the current room (stored in session)
-    socket.leave(socket.room);
-    // join new room, received as function parameter
-    socket.join(newroom);
-    // update socket session room title
-    socket.room = newroom;
-
-  });
+      });
 
 
 });

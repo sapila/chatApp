@@ -1,5 +1,12 @@
 <!doctype html>
 <head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 <style type="text/css">
 #messages{
 	width:90%;
@@ -7,7 +14,7 @@
 
 }
 .bubble{
-		margin:5px;
+	margin:5px;
 		padding-left:20px;
 		padding-right:20px;
 		padding-top: 5px;
@@ -16,13 +23,16 @@
 		border:1px solid blue;
 		border-radius:10px;
 	}
+  html{
+    height:100%;
+  }
 	</style>
 	
 </head>
-<html>
+<html >
 
 
-<body>
+<body >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
  <script src="/../socket.io/socket.io.js"></script>
   <script>
@@ -62,19 +72,27 @@
 
 </script>
 <script src="homeController.js"></script>
-Chat welcome
-<div id="messages"></div>
 
-<input id="messageBox" type="text" />
-<button id="sendButton" onclick="sendMessage()">Send</button>
-<h4>Online Now</h4>
-<div id="whoIsOnline">
+<div class="col-sm-8">
+  <div id="messages"></div>
+
+  <div  class="input-group">
+    <input class="form-control" id="messageBox" type="text" />
+    <span class="input-group-btn">
+      <button class="btn btn-default" id="sendButton" onclick="sendMessage()">Send</button>
+    </span>
+  </div>
 </div>
+<div class="col-sm-4" style="background-color: #444444;color:white;">
 
-<h4>Chatrooms</h4>
-<div id="availableChatrooms">
+    <h4>Online Now</h4>
+    <div id="whoIsOnline">
+    </div>
+    <h4>Chatrooms</h4>
+    <div id="availableChatrooms">
+    </div>
+
 </div>
-
 </body>
 
 </html>
